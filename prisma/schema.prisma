@@ -1,0 +1,46 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Manager {
+  id              Int       @id @default(autoincrement())
+  dns             String?
+  backgroundImage String?   @map("background_image")
+  logoImage       String?   @map("logo_image")
+  lastLogin       DateTime? @map("last_login")
+  createdAt       DateTime  @default(now()) @map("created_at")
+  updatedAt       DateTime? @updatedAt @map("updated_at")
+}
+
+model Users {
+  id        String     @id @default(uuid())
+  dnsGroup  String?    @map("dns_group")
+  mac       String?
+  lastLogin DateTime?  @map("last_login")
+  createdAt DateTime   @default(now()) @map("created_at")
+  updatedAt DateTime?  @updatedAt @map("updated_at")
+  Channels  Channels[]
+
+  @@map("users")
+}
+
+model Channels {
+  id        Int     @id @default(autoincrement())
+  favorites String?
+  recents   String?
+  user_id   Users   @relation(fields: [usersId], references: [id])
+  usersId   String
+
+  @@map("channels")
+}
