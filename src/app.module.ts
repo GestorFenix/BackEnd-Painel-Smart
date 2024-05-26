@@ -9,6 +9,7 @@ import { DeleteUserController } from './controllers/delete-user-by-id.controller
 import { GetUserByIdController } from './controllers/get-user-by-id.controller'
 import { UpdatePasswordController } from './controllers/update-user-password.controller'
 import { UpdateUserController } from './controllers/update-user.controller'
+import { GetUsersController } from './controllers/get-users.controller'
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { UpdateUserController } from './controllers/update-user.controller'
     CreateUserController,
     DeleteUserController,
     GetUserByIdController,
+    GetUsersController,
     UpdatePasswordController,
     UpdateUserController,
   ],
