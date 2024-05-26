@@ -5,6 +5,10 @@ import { envSchema } from './env'
 import { AuthModule } from './auth/auth.module'
 import { AuthenticateController } from './controllers/authenticate.controller'
 import { CreateUserController } from './controllers/create-user.controller'
+import { DeleteUserController } from './controllers/delete-user-by-id.controller'
+import { GetUserByIdController } from './controllers/get-user-by-id.controller'
+import { UpdatePasswordController } from './controllers/update-user-password.controller'
+import { UpdateUserController } from './controllers/update-user.controller'
 
 @Module({
   imports: [
@@ -15,6 +19,13 @@ import { CreateUserController } from './controllers/create-user.controller'
     }),
   ],
   providers: [PrismaService],
-  controllers: [AuthenticateController, CreateUserController],
+  controllers: [
+    AuthenticateController,
+    CreateUserController,
+    DeleteUserController,
+    GetUserByIdController,
+    UpdatePasswordController,
+    UpdateUserController,
+  ],
 })
 export class AppModule {}
