@@ -25,7 +25,7 @@ describe('Create account (e2e)', () => {
       name: 'Saul Gomes',
       email: 'saul.contatodev@gmail.com',
       password: '123456',
-      phone: '(71) 99999-9999',
+      dns: '192.0.0.1',
     })
 
     expect(response.statusCode).toBe(201)

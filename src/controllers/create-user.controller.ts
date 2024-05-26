@@ -15,7 +15,7 @@ const createUserBodySchema = z.object({
   name: z.string(),
   email: z.string().email(),
   password: z.string(),
-  phone: z.string(),
+  dns: z.string(),
 })
 
 type CreateUserBodySchema = z.infer<typeof createUserBodySchema>
@@ -28,7 +28,7 @@ export class CreateUserController {
 
   @Post()
   async handle(@Body() body: CreateUserBodySchema) {
-    const { email, password, name } = body
+    const { email, password, name, dns } = body
 
     const userWithSameEmail = await this.prisma.users.findUnique({
       where: {
@@ -45,6 +45,11 @@ export class CreateUserController {
         name,
         email,
         password: hashedPassword,
+        Franchises: {
+          create: {
+            dns,
+          },
+        },
       },
     })
   }
