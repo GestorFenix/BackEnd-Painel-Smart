@@ -13,6 +13,7 @@ import { GetUsersController } from './controllers/get-users.controller'
 import { UpdateLogo } from './controllers/update-logo.controller'
 import { UpdateBackground } from './controllers/update-backgrouund.controller'
 import { GetUsersOnlineController } from './controllers/get-users-online.controller'
+import { UpdateClientsLimit } from './controllers/update-clients-limit.controller'
 
 @Module({
   imports: [
@@ -34,6 +35,7 @@ import { GetUsersOnlineController } from './controllers/get-users-online.control
     UpdateLogo,
     UpdateBackground,
     GetUsersOnlineController,
+    UpdateClientsLimit,
   ],
 })
 export class AppModule {}
