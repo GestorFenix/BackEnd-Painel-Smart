@@ -10,6 +10,8 @@ import { GetUserByIdController } from './controllers/get-user-by-id.controller'
 import { UpdatePasswordController } from './controllers/update-user-password.controller'
 import { UpdateUserController } from './controllers/update-user.controller'
 import { GetUsersController } from './controllers/get-users.controller'
+import { UpdateLogo } from './controllers/update-logo.controller'
+import { UpdateBackground } from './controllers/update-backgrouund.controller'
 
 @Module({
   imports: [
@@ -28,6 +30,8 @@ import { GetUsersController } from './controllers/get-users.controller'
     GetUsersController,
     UpdatePasswordController,
     UpdateUserController,
+    UpdateLogo,
+    UpdateBackground,
   ],
 })
 export class AppModule {}
