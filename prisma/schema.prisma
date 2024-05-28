@@ -23,7 +23,6 @@ model Users {
   lastLogin  DateTime?    @map("last_login")
   createdAt  DateTime     @default(now()) @map("created_at")
   updatedAt  DateTime?    @updatedAt @map("updated_at")
-  Channels   Channels[]
   Franchises Franchises[]
 
   @@map("users")
@@ -33,6 +32,7 @@ model Franchises {
   id              Int       @id @default(autoincrement())
   name            String?
   dns             String?   @unique
+  clientLimit     Int?      @map("client_limit")
   backgroundImage String?   @map("background_image")
   logoImage       String?   @map("logo_image")
   createdAt       DateTime  @default(now()) @map("created_at")
@@ -40,15 +40,26 @@ model Franchises {
   user_id         Users     @relation(fields: [usersId], references: [id])
   usersId         String
 
-  @@map("franhises")
+  @@map("franchises")
+}
+
+model Clients {
+  id          String     @id @default(uuid())
+  mac         String?    @unique
+  name        String?
+  description String?
+  lastLogin   DateTime?  @map("last_login")
+  createdAt   DateTime   @default(now()) @map("created_at")
+  updatedAt   DateTime?  @updatedAt @map("updated_at")
+  Channels    Channels[]
 }
 
 model Channels {
   id        Int     @id @default(autoincrement())
   favorites String?
   recents   String?
-  user_id   Users   @relation(fields: [usersId], references: [id])
-  usersId   String
+  clientId  Clients @relation(fields: [clientsId], references: [id])
+  clientsId String
 
   @@map("channels")
 }
