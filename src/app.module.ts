@@ -12,6 +12,7 @@ import { UpdateUserController } from './controllers/update-user.controller'
 import { GetUsersController } from './controllers/get-users.controller'
 import { UpdateLogo } from './controllers/update-logo.controller'
 import { UpdateBackground } from './controllers/update-backgrouund.controller'
+import { GetUsersOnlineController } from './controllers/get-users-online.controller'
 
 @Module({
   imports: [
@@ -32,6 +33,7 @@ import { UpdateBackground } from './controllers/update-backgrouund.controller'
     UpdateUserController,
     UpdateLogo,
     UpdateBackground,
+    GetUsersOnlineController,
   ],
 })
 export class AppModule {}
