@@ -1,23 +1,17 @@
-/*
-  Warnings:
+-- CreateTable
+CREATE TABLE "users" (
+    "id" TEXT NOT NULL,
+    "name" TEXT,
+    "email" TEXT,
+    "password" TEXT,
+    "dns_group" TEXT,
+    "isAdm" BOOLEAN DEFAULT false,
+    "last_login" TIMESTAMP(3),
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" TIMESTAMP(3),
 
-  - You are about to drop the column `usersId` on the `channels` table. All the data in the column will be lost.
-  - You are about to drop the `franhises` table. If the table is not empty, all the data it contains will be lost.
-  - Added the required column `clientsId` to the `channels` table without a default value. This is not possible if the table is not empty.
-
-*/
--- DropForeignKey
-ALTER TABLE "channels" DROP CONSTRAINT "channels_usersId_fkey";
-
--- DropForeignKey
-ALTER TABLE "franhises" DROP CONSTRAINT "franhises_usersId_fkey";
-
--- AlterTable
-ALTER TABLE "channels" DROP COLUMN "usersId",
-ADD COLUMN     "clientsId" TEXT NOT NULL;
-
--- DropTable
-DROP TABLE "franhises";
+    CONSTRAINT "users_pkey" PRIMARY KEY ("id")
+);
 
 -- CreateTable
 CREATE TABLE "franchises" (
@@ -46,6 +40,19 @@ CREATE TABLE "Clients" (
 
     CONSTRAINT "Clients_pkey" PRIMARY KEY ("id")
 );
+
+-- CreateTable
+CREATE TABLE "channels" (
+    "id" SERIAL NOT NULL,
+    "favorites" TEXT,
+    "recents" TEXT,
+    "clientsId" TEXT NOT NULL,
+
+    CONSTRAINT "channels_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateIndex
+CREATE UNIQUE INDEX "users_email_key" ON "users"("email");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "franchises_dns_key" ON "franchises"("dns");
