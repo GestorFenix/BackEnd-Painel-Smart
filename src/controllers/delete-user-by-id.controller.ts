@@ -6,12 +6,15 @@ import {
   Param,
 } from '@nestjs/common'
 import { PrismaService } from '@/prisma/prisma.service'
+import { ApiOperation, ApiTags } from '@nestjs/swagger'
 
 @Controller('user/:id')
+@ApiTags('Franquias')
 export class DeleteUserController {
   constructor(private readonly prisma: PrismaService) {}
 
   @Delete()
+  @ApiOperation({ summary: 'Deleta uma franquia pelo ID' })
   @HttpCode(204)
   async handle(@Param('id') id: string) {
     const user = await this.prisma.users.findUnique({

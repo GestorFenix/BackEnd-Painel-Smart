@@ -10,6 +10,8 @@ import { ZodValidationPipe } from '@/pipes/zod-validation-pipe'
 import { PrismaService } from '@/prisma/prisma.service'
 import { z } from 'zod'
 import { Public } from '@/auth/public'
+import { ApiBearerAuth, ApiBody, ApiOperation, ApiTags } from '@nestjs/swagger'
+import { CreateUserBodyDto } from '@/swagger/create-user-body.dto'
 
 const createUserBodySchema = z.object({
   name: z.string(),
@@ -21,12 +23,16 @@ const createUserBodySchema = z.object({
 type CreateUserBodySchema = z.infer<typeof createUserBodySchema>
 
 @Controller('user')
+@ApiTags('Franquias')
 @Public()
 @UsePipes(new ZodValidationPipe(createUserBodySchema))
 export class CreateUserController {
   constructor(private readonly prisma: PrismaService) {}
 
   @Post()
+  @ApiOperation({ summary: 'Cria uma nova franquia.' })
+  @ApiBearerAuth()
+  @ApiBody({ type: CreateUserBodyDto })
   async handle(@Body() body: CreateUserBodySchema) {
     const { email, password, name, dns } = body
 

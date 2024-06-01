@@ -11,6 +11,8 @@ import { PrismaService } from '@/prisma/prisma.service'
 import { z } from 'zod'
 import { Public } from '@/auth/public'
 import { compare } from 'bcryptjs'
+import { ApiBody, ApiOperation, ApiTags } from '@nestjs/swagger'
+import { AuthenticateBodyDto } from '@/swagger/authenticate-body.dto'
 
 const authenticateBodySchema = z.object({
   email: z.string().email(),
@@ -24,6 +26,7 @@ type AuthenticateBodySchema = z.infer<typeof authenticateBodySchema>
 // )
 
 @Controller('login')
+@ApiTags('Login')
 @Public()
 @UsePipes(new ZodValidationPipe(authenticateBodySchema))
 export class AuthenticateController {
@@ -33,6 +36,10 @@ export class AuthenticateController {
   ) {}
 
   @Post()
+  @ApiBody({ type: AuthenticateBodyDto })
+  @ApiOperation({
+    summary: 'Rota de login de acesso ao sistema usando email e senha.',
+  })
   async handle(@Body() body: AuthenticateBodySchema) {
     const { email, password } = body
 
