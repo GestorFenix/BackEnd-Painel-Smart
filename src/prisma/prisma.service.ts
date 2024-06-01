@@ -7,20 +7,20 @@ import { PrismaClient } from '@prisma/client'
 
 @Injectable()
 export class PrismaService
-	extends PrismaClient
-	implements OnModuleInit, OnModuleDestroy
+  extends PrismaClient
+  implements OnModuleInit, OnModuleDestroy
 {
-	constructor() {
-		super({
-			log: ['error'],
-		})
-	}
+  constructor() {
+    super({
+      log: ['error'],
+    })
+  }
 
-	onModuleInit() {
-		return this.$connect()
-	}
+  onModuleInit() {
+    return this.$connect()
+  }
 
-	onModuleDestroy() {
-		return this.$disconnect()
-	}
+  onModuleDestroy() {
+    return this.$disconnect()
+  }
 }

@@ -22,7 +22,7 @@ type UpdatePasswordBodySchema = z.infer<typeof updatePasswordBodySchema>
 
 @Controller('user/:id/password')
 export class UpdatePasswordController {
-  constructor(private readonly prisma: PrismaService) { }
+  constructor(private readonly prisma: PrismaService) {}
 
   @Put()
   async handle(

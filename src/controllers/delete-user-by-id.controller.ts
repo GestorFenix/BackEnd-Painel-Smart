@@ -11,7 +11,7 @@ import { ApiOperation, ApiTags } from '@nestjs/swagger'
 @Controller('user/:id')
 @ApiTags('Franquias')
 export class DeleteUserController {
-  constructor(private readonly prisma: PrismaService) { }
+  constructor(private readonly prisma: PrismaService) {}
 
   @Delete()
   @ApiOperation({ summary: 'Deleta uma franquia pelo ID' })

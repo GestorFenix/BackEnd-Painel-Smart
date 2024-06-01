@@ -5,7 +5,7 @@ import { ApiOperation, ApiTags } from '@nestjs/swagger'
 @Controller('users/online')
 @ApiTags('Franquias')
 export class GetUsersOnlineController {
-  constructor(private readonly prisma: PrismaService) { }
+  constructor(private readonly prisma: PrismaService) {}
 
   @Get()
   @ApiOperation({ summary: 'Retorna todos os usuários que estão online.' })

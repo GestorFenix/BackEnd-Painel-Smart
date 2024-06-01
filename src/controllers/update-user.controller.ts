@@ -21,7 +21,7 @@ type UpdateUserBodySchema = z.infer<typeof updateUserBodySchema>
 
 @Controller('user/:id')
 export class UpdateUserController {
-  constructor(private readonly prisma: PrismaService) { }
+  constructor(private readonly prisma: PrismaService) {}
 
   @Put()
   async handle(

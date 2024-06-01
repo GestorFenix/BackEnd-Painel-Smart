@@ -36,7 +36,7 @@ describe('Get users (e2e)', () => {
     const token = jwt.sign({ sub: user.id })
 
     const response = await request(app.getHttpServer())
-      .get(`/users`)
+      .get('/users')
       .set('Authorization', `Bearer ${token}`)
 
     expect(response.statusCode).toBe(200)
@@ -44,7 +44,7 @@ describe('Get users (e2e)', () => {
 
   test('Must not be able to get a user with invalid token', async () => {
     const response = await request(app.getHttpServer())
-      .get(`/user/invalid-id`)
+      .get('/user/invalid-id')
       .set('Authorization', 'invalid-token')
 
     expect(response.statusCode).toBe(401)

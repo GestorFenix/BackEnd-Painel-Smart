@@ -5,7 +5,7 @@ import { ApiOperation, ApiTags } from '@nestjs/swagger'
 @Controller('users')
 @ApiTags('Franquias')
 export class GetUsersController {
-  constructor(private readonly prisma: PrismaService) { }
+  constructor(private readonly prisma: PrismaService) {}
 
   @Get()
   @ApiOperation({ summary: 'Retorna todos as franquias e suas informções.' })

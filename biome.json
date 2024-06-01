@@ -6,7 +6,11 @@
   "linter": {
     "enabled": true,
     "rules": {
-      "recommended": true
+      "recommended": true,
+      "style": {
+        "useImportType": "off",
+        "noNonNullAssertion": "off"
+      }
     }
   },
   "formatter": {
@@ -14,12 +18,15 @@
     "formatWithErrors": false,
     "ignore": [],
     "attributePosition": "auto",
-    "indentStyle": "tab",
+    "indentStyle": "space",
     "indentWidth": 2,
     "lineEnding": "lf",
     "lineWidth": 80
   },
   "javascript": {
+    "parser": {
+      "unsafeParameterDecoratorsEnabled": true
+    },
     "formatter": {
       "arrowParentheses": "always",
       "bracketSameLine": false,

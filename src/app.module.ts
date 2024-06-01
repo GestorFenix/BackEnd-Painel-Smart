@@ -16,26 +16,26 @@ import { envSchema } from './env'
 import { PrismaService } from './prisma/prisma.service'
 
 @Module({
-	imports: [
-		AuthModule,
-		ConfigModule.forRoot({
-			validate: (env) => envSchema.parse(env),
-			isGlobal: true,
-		}),
-	],
-	providers: [PrismaService],
-	controllers: [
-		AuthenticateController,
-		CreateUserController,
-		DeleteUserController,
-		GetUserByIdController,
-		GetUsersController,
-		UpdatePasswordController,
-		UpdateUserController,
-		UpdateLogo,
-		UpdateBackground,
-		GetUsersOnlineController,
-		UpdateClientsLimit,
-	],
+  imports: [
+    AuthModule,
+    ConfigModule.forRoot({
+      validate: (env) => envSchema.parse(env),
+      isGlobal: true,
+    }),
+  ],
+  providers: [PrismaService],
+  controllers: [
+    AuthenticateController,
+    CreateUserController,
+    DeleteUserController,
+    GetUserByIdController,
+    GetUsersController,
+    UpdatePasswordController,
+    UpdateUserController,
+    UpdateLogo,
+    UpdateBackground,
+    GetUsersOnlineController,
+    UpdateClientsLimit,
+  ],
 })
 export class AppModule {}

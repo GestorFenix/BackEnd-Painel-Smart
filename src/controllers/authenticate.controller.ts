@@ -33,7 +33,7 @@ export class AuthenticateController {
   constructor(
     private readonly prisma: PrismaService,
     private readonly jwt: JwtService,
-  ) { }
+  ) {}
 
   @Post()
   @ApiBody({ type: AuthenticateBodyDto })

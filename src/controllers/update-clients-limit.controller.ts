@@ -13,7 +13,7 @@ type UpdateUserBodySchema = z.infer<typeof updateUserBodySchema>
 
 @Controller('user/:id/limit')
 export class UpdateClientsLimit {
-  constructor(private readonly prisma: PrismaService) { }
+  constructor(private readonly prisma: PrismaService) {}
 
   @Put()
   async handle(
