@@ -1,6 +1,6 @@
-import { Body, Controller, NotFoundException, Param, Put } from '@nestjs/common'
 import { ZodValidationPipe } from '@/pipes/zod-validation-pipe'
 import { PrismaService } from '@/prisma/prisma.service'
+import { Body, Controller, NotFoundException, Param, Put } from '@nestjs/common'
 import { z } from 'zod'
 
 const updateUserBodySchema = z.object({
@@ -13,7 +13,7 @@ type UpdateUserBodySchema = z.infer<typeof updateUserBodySchema>
 
 @Controller('user/:id/limit')
 export class UpdateClientsLimit {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(private readonly prisma: PrismaService) { }
 
   @Put()
   async handle(

@@ -1,3 +1,4 @@
+import { PrismaService } from '@/prisma/prisma.service'
 import {
   Controller,
   Delete,
@@ -5,13 +6,12 @@ import {
   NotFoundException,
   Param,
 } from '@nestjs/common'
-import { PrismaService } from '@/prisma/prisma.service'
 import { ApiOperation, ApiTags } from '@nestjs/swagger'
 
 @Controller('user/:id')
 @ApiTags('Franquias')
 export class DeleteUserController {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(private readonly prisma: PrismaService) { }
 
   @Delete()
   @ApiOperation({ summary: 'Deleta uma franquia pelo ID' })

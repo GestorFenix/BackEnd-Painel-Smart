@@ -1,3 +1,5 @@
+import { ZodValidationPipe } from '@/pipes/zod-validation-pipe'
+import { PrismaService } from '@/prisma/prisma.service'
 import {
   Body,
   ConflictException,
@@ -6,8 +8,6 @@ import {
   Param,
   Put,
 } from '@nestjs/common'
-import { ZodValidationPipe } from '@/pipes/zod-validation-pipe'
-import { PrismaService } from '@/prisma/prisma.service'
 import { z } from 'zod'
 
 const updateUserBodySchema = z.object({
@@ -21,7 +21,7 @@ type UpdateUserBodySchema = z.infer<typeof updateUserBodySchema>
 
 @Controller('user/:id')
 export class UpdateUserController {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(private readonly prisma: PrismaService) { }
 
   @Put()
   async handle(

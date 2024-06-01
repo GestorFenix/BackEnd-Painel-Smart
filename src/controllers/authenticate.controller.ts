@@ -1,3 +1,7 @@
+import { Public } from '@/auth/public'
+import { ZodValidationPipe } from '@/pipes/zod-validation-pipe'
+import { PrismaService } from '@/prisma/prisma.service'
+import { AuthenticateBodyDto } from '@/swagger/authenticate-body.dto'
 import {
   Body,
   Controller,
@@ -6,13 +10,9 @@ import {
   UsePipes,
 } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
-import { ZodValidationPipe } from '@/pipes/zod-validation-pipe'
-import { PrismaService } from '@/prisma/prisma.service'
-import { z } from 'zod'
-import { Public } from '@/auth/public'
-import { compare } from 'bcryptjs'
 import { ApiBody, ApiOperation, ApiTags } from '@nestjs/swagger'
-import { AuthenticateBodyDto } from '@/swagger/authenticate-body.dto'
+import { compare } from 'bcryptjs'
+import { z } from 'zod'
 
 const authenticateBodySchema = z.object({
   email: z.string().email(),
@@ -33,7 +33,7 @@ export class AuthenticateController {
   constructor(
     private readonly prisma: PrismaService,
     private readonly jwt: JwtService,
-  ) {}
+  ) { }
 
   @Post()
   @ApiBody({ type: AuthenticateBodyDto })

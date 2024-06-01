@@ -1,11 +1,11 @@
-import { Controller, Get, NotFoundException, Param } from '@nestjs/common'
 import { PrismaService } from '@/prisma/prisma.service'
+import { Controller, Get, NotFoundException, Param } from '@nestjs/common'
 import { ApiOperation, ApiTags } from '@nestjs/swagger'
 
 @Controller('user/:id')
 @ApiTags('Franquias')
 export class GetUserByIdController {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(private readonly prisma: PrismaService) { }
 
   @Get()
   @ApiOperation({ summary: 'Retorna as informações de uma franquia pelo ID' })

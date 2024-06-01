@@ -1,3 +1,5 @@
+import { ZodValidationPipe } from '@/pipes/zod-validation-pipe'
+import { PrismaService } from '@/prisma/prisma.service'
 import {
   Body,
   Controller,
@@ -6,10 +8,8 @@ import {
   Put,
   UnauthorizedException,
 } from '@nestjs/common'
-import { ZodValidationPipe } from '@/pipes/zod-validation-pipe'
-import { PrismaService } from '@/prisma/prisma.service'
-import { z } from 'zod'
 import { compare, hash } from 'bcryptjs'
+import { z } from 'zod'
 
 const updatePasswordBodySchema = z.object({
   password: z.string(),
@@ -22,7 +22,7 @@ type UpdatePasswordBodySchema = z.infer<typeof updatePasswordBodySchema>
 
 @Controller('user/:id/password')
 export class UpdatePasswordController {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(private readonly prisma: PrismaService) { }
 
   @Put()
   async handle(

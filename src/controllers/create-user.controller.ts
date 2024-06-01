@@ -1,3 +1,7 @@
+import { Public } from '@/auth/public'
+import { ZodValidationPipe } from '@/pipes/zod-validation-pipe'
+import { PrismaService } from '@/prisma/prisma.service'
+import { CreateUserBodyDto } from '@/swagger/create-user-body.dto'
 import {
   Body,
   ConflictException,
@@ -5,13 +9,9 @@ import {
   Post,
   UsePipes,
 } from '@nestjs/common'
-import { hash } from 'bcryptjs'
-import { ZodValidationPipe } from '@/pipes/zod-validation-pipe'
-import { PrismaService } from '@/prisma/prisma.service'
-import { z } from 'zod'
-import { Public } from '@/auth/public'
 import { ApiBearerAuth, ApiBody, ApiOperation, ApiTags } from '@nestjs/swagger'
-import { CreateUserBodyDto } from '@/swagger/create-user-body.dto'
+import { hash } from 'bcryptjs'
+import { z } from 'zod'
 
 const createUserBodySchema = z.object({
   name: z.string(),
@@ -27,7 +27,7 @@ type CreateUserBodySchema = z.infer<typeof createUserBodySchema>
 @Public()
 @UsePipes(new ZodValidationPipe(createUserBodySchema))
 export class CreateUserController {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(private readonly prisma: PrismaService) { }
 
   @Post()
   @ApiOperation({ summary: 'Cria uma nova franquia.' })
