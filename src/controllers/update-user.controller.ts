@@ -8,6 +8,7 @@ import {
   Param,
   Put,
 } from '@nestjs/common'
+import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger'
 import { z } from 'zod'
 
 const updateUserBodySchema = z.object({
@@ -20,11 +21,15 @@ const bodyValidationPipe = new ZodValidationPipe(updateUserBodySchema)
 type UpdateUserBodySchema = z.infer<typeof updateUserBodySchema>
 
 @Controller('user/:id')
+@ApiTags('Franquias')
+@ApiBearerAuth()
 export class UpdateUserController {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(private readonly prisma: PrismaService) { }
 
   @Put()
+  @ApiOperation({ summary: 'Rota para atualizar informações da franquia.' })
   async handle(
+
     @Body(bodyValidationPipe) body: UpdateUserBodySchema,
     @Param('id') id: string,
   ) {

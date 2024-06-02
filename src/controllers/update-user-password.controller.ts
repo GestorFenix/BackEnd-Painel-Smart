@@ -8,6 +8,7 @@ import {
   Put,
   UnauthorizedException,
 } from '@nestjs/common'
+import { ApiOperation, ApiTags } from '@nestjs/swagger'
 import { compare, hash } from 'bcryptjs'
 import { z } from 'zod'
 
@@ -21,10 +22,12 @@ const bodyValidationPipe = new ZodValidationPipe(updatePasswordBodySchema)
 type UpdatePasswordBodySchema = z.infer<typeof updatePasswordBodySchema>
 
 @Controller('user/:id/password')
+@ApiTags('Franquias')
 export class UpdatePasswordController {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(private readonly prisma: PrismaService) { }
 
   @Put()
+  @ApiOperation({ summary: 'Rota para atualizar a senha.' })
   async handle(
     @Body(bodyValidationPipe) body: UpdatePasswordBodySchema,
     @Param('id') id: string,

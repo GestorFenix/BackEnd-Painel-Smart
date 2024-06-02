@@ -1,6 +1,7 @@
 import { ZodValidationPipe } from '@/pipes/zod-validation-pipe'
 import { PrismaService } from '@/prisma/prisma.service'
 import { Body, Controller, NotFoundException, Param, Put } from '@nestjs/common'
+import { ApiOperation, ApiTags } from '@nestjs/swagger'
 import { z } from 'zod'
 
 const updateUserBodySchema = z.object({
@@ -12,10 +13,12 @@ const bodyValidationPipe = new ZodValidationPipe(updateUserBodySchema)
 type UpdateUserBodySchema = z.infer<typeof updateUserBodySchema>
 
 @Controller('user/:id/background')
+@ApiTags('Franquias')
 export class UpdateBackground {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(private readonly prisma: PrismaService) { }
 
   @Put()
+  @ApiOperation({ summary: 'Rota para atualizar o plano de fundo do aplicativo da franquia.' })
   async handle(
     @Body(bodyValidationPipe) body: UpdateUserBodySchema,
     @Param('id') id: string,
