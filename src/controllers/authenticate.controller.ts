@@ -21,10 +21,6 @@ const authenticateBodySchema = z.object({
 
 type AuthenticateBodySchema = z.infer<typeof authenticateBodySchema>
 
-// const response = await fetch(
-//   `http://spacee.icu:80/player_api.php?username=sauldev616&password=8301643cgt`,
-// )
-
 @Controller('login')
 @ApiTags('Login')
 @Public()
@@ -43,7 +39,7 @@ export class AuthenticateController {
   async handle(@Body() body: AuthenticateBodySchema) {
     const { email, password } = body
 
-    const user = await this.prisma.users.findUnique({
+    const user = await this.prisma.users.findFirst({
       where: {
         email,
       },
