@@ -14,6 +14,7 @@ import { UpdatePasswordController } from './controllers/update-user-password.con
 import { UpdateUserController } from './controllers/update-user.controller'
 import { envSchema } from './env'
 import { PrismaService } from './prisma/prisma.service'
+import { GetUserSessionInfo } from './controllers/get-user-session-info.controller'
 
 @Module({
   imports: [
@@ -36,6 +37,7 @@ import { PrismaService } from './prisma/prisma.service'
     UpdateBackground,
     GetUsersOnlineController,
     UpdateClientsLimit,
+    GetUserSessionInfo,
   ],
 })
 export class AppModule {}
