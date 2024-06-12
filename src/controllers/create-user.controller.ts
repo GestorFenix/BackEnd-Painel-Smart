@@ -27,7 +27,7 @@ type CreateUserBodySchema = z.infer<typeof createUserBodySchema>
 @Public()
 @UsePipes(new ZodValidationPipe(createUserBodySchema))
 export class CreateUserController {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(private readonly prisma: PrismaService) { }
 
   @Post()
   @ApiOperation({ summary: 'Cria uma nova franquia.' })
@@ -54,6 +54,7 @@ export class CreateUserController {
         Franchises: {
           create: {
             dns,
+            clientLimit: 50,
           },
         },
       },
