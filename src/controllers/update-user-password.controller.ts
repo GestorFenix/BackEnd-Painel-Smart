@@ -24,7 +24,7 @@ type UpdatePasswordBodySchema = z.infer<typeof updatePasswordBodySchema>
 @Controller('user/:id/password')
 @ApiTags('Franquias')
 export class UpdatePasswordController {
-  constructor(private readonly prisma: PrismaService) { }
+  constructor(private readonly prisma: PrismaService) {}
 
   @Put()
   @ApiOperation({ summary: 'Rota para atualizar a senha.' })

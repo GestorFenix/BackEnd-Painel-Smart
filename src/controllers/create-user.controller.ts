@@ -51,12 +51,8 @@ export class CreateUserController {
         name,
         email,
         password: hashedPassword,
-        Franchises: {
-          create: {
-            dns,
-            clientLimit: 50,
-          },
-        },
+        dns,
+        clientLimit: 50,
       },
     })
   }

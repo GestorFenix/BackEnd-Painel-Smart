@@ -15,27 +15,29 @@ type UpdateUserBodySchema = z.infer<typeof updateUserBodySchema>
 @Controller('user/:id/background')
 @ApiTags('Franquias')
 export class UpdateBackground {
-  constructor(private readonly prisma: PrismaService) { }
+  constructor(private readonly prisma: PrismaService) {}
 
   @Put()
-  @ApiOperation({ summary: 'Rota para atualizar o plano de fundo do aplicativo da franquia.' })
+  @ApiOperation({
+    summary: 'Rota para atualizar o plano de fundo do aplicativo da franquia.',
+  })
   async handle(
     @Body(bodyValidationPipe) body: UpdateUserBodySchema,
     @Param('id') id: string,
   ) {
     const { background } = body
 
-    const franchise = await this.prisma.franchises.findUnique({
+    const franchise = await this.prisma.users.findUnique({
       where: {
-        id: Number(id),
+        id,
       },
     })
 
     if (!franchise) throw new NotFoundException('Resource not found.')
 
-    await this.prisma.franchises.update({
+    await this.prisma.users.update({
       where: {
-        id: Number(id),
+        id,
       },
       data: {
         backgroundImage: background,

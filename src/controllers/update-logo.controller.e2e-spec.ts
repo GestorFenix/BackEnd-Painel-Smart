@@ -30,21 +30,14 @@ describe('Update logo (e2e)', () => {
         name: 'Saul Gomes',
         email: 'saul.contatodev@gmail.com',
         password: await hash('123456', 8),
-        Franchises: {
-          create: {
-            logoImage: 'imagem-anterior',
-          },
-        },
-      },
-      include: {
-        Franchises: true,
+        logoImage: 'imagem-anterior',
       },
     })
 
     const token = jwt.sign({ sub: user.id })
 
     const response = await request(app.getHttpServer())
-      .put(`/user/${user.Franchises[0].id}/logo`)
+      .put(`/user/${user.id}/logo`)
       .set('Authorization', `Bearer ${token}`)
       .send({
         logo: 'nova-imagem',
@@ -56,12 +49,9 @@ describe('Update logo (e2e)', () => {
       where: {
         id: user.id,
       },
-      select: {
-        Franchises: true,
-      },
     })
 
-    expect(updatedUser?.Franchises[0].logoImage).toEqual('nova-imagem')
+    expect(updatedUser?.logoImage).toEqual('nova-imagem')
   })
 
   test('Must not be able to update a user with invalid id', async () => {

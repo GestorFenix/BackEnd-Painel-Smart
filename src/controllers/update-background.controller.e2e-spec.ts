@@ -30,21 +30,14 @@ describe('Update background (e2e)', () => {
         name: 'Saul Gomes',
         email: 'saul.contatodev@gmail.com',
         password: await hash('123456', 8),
-        Franchises: {
-          create: {
-            backgroundImage: 'imagem-anterior',
-          },
-        },
-      },
-      include: {
-        Franchises: true,
+        backgroundImage: 'imagem-anterior',
       },
     })
 
     const token = jwt.sign({ sub: user.id })
 
     const response = await request(app.getHttpServer())
-      .put(`/user/${user.Franchises[0].id}/background`)
+      .put(`/user/${user.id}/background`)
       .set('Authorization', `Bearer ${token}`)
       .send({
         background: 'nova-imagem',
@@ -56,12 +49,9 @@ describe('Update background (e2e)', () => {
       where: {
         id: user.id,
       },
-      select: {
-        Franchises: true,
-      },
     })
 
-    expect(updatedUser?.Franchises[0].backgroundImage).toEqual('nova-imagem')
+    expect(updatedUser?.backgroundImage).toEqual('nova-imagem')
   })
 
   test('Must not be able to update a user with invalid id', async () => {

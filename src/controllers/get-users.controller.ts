@@ -16,13 +16,8 @@ export class GetUsersController {
         email: true,
         name: true,
         lastLogin: true,
-        Franchises: {
-          select: {
-            id: true,
-            dns: true,
-            clientLimit: true,
-          },
-        },
+        dns: true,
+        clientLimit: true,
       },
     })
   }
