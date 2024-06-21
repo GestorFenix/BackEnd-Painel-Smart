@@ -15,7 +15,7 @@ type UpdateUserBodySchema = z.infer<typeof updateUserBodySchema>
 @Controller('user/:id/limit')
 @ApiTags('Franquias')
 export class UpdateClientsLimit {
-  constructor(private readonly prisma: PrismaService) { }
+  constructor(private readonly prisma: PrismaService) {}
 
   @Put()
   @ApiOperation({
@@ -27,19 +27,17 @@ export class UpdateClientsLimit {
   ) {
     const { clientLimit } = body
 
-    console.log(clientLimit)
-
-    const franchise = await this.prisma.franchises.findUnique({
+    const franchise = await this.prisma.users.findUnique({
       where: {
-        id: Number(id),
+        id,
       },
     })
 
     if (!franchise) throw new NotFoundException('Resource not found.')
 
-    await this.prisma.franchises.update({
+    await this.prisma.users.update({
       where: {
-        id: Number(id),
+        id,
       },
       data: {
         clientLimit: Number(clientLimit),

@@ -24,30 +24,22 @@ describe('Update clients limit (e2e)', () => {
     await app.init()
   })
 
-  test('[PUT] /user/:id/logo', async () => {
+  test('[PUT] /user/:id/limit', async () => {
     const user = await prisma.users.create({
       data: {
         name: 'Saul Gomes',
         email: 'saul.contatodev@gmail.com',
         password: await hash('123456', 8),
-        Franchises: {
-          create: {
-            clientLimit: 50,
-          },
-        },
-      },
-      include: {
-        Franchises: true,
       },
     })
 
     const token = jwt.sign({ sub: user.id })
 
     const response = await request(app.getHttpServer())
-      .put(`/user/${user.Franchises[0].id}/limit`)
+      .put(`/user/${user.id}/limit`)
       .set('Authorization', `Bearer ${token}`)
       .send({
-        clientLimit: '100',
+        clientLimit: 100,
       })
 
     expect(response.statusCode).toBe(200)
@@ -56,12 +48,9 @@ describe('Update clients limit (e2e)', () => {
       where: {
         id: user.id,
       },
-      select: {
-        Franchises: true,
-      },
     })
 
-    expect(updatedUser?.Franchises[0].clientLimit).toEqual(100)
+    expect(updatedUser?.clientLimit).toEqual(100)
   })
 
   test('Must not be able to update a user with invalid id', async () => {
