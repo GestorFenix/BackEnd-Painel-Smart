@@ -14,52 +14,36 @@ datasource db {
 }
 
 model Users {
-  id         String       @id @default(uuid())
-  name       String?
-  email      String?      @unique
-  password   String?
-  dnsGroup   String?      @map("dns_group")
-  isAdm      Boolean?     @default(false)
-  lastLogin  DateTime?    @map("last_login")
-  createdAt  DateTime     @default(now()) @map("created_at")
-  updatedAt  DateTime?    @updatedAt @map("updated_at")
-  Franchises Franchises[]
+  id              String    @id @default(uuid())
+  name            String?
+  email           String?   @unique
+  password        String?
+  dns             String?   @unique
+  clientLimit     Int?      @map("client_limit")
+  logoImage       String?   @map("logo_image")
+  backgroundImage String?   @map("background_image")
+  isAdm           Boolean?  @default(false)
+  lastLogin       DateTime? @map("last_login")
+  createdAt       DateTime  @default(now()) @map("created_at")
+  updatedAt       DateTime? @updatedAt @map("updated_at")
 
   @@map("users")
 }
 
-model Franchises {
-  id              Int       @id @default(autoincrement())
-  name            String?
-  dns             String?   @unique
-  clientLimit     Int?      @map("client_limit")
-  backgroundImage String?   @map("background_image")
-  logoImage       String?   @map("logo_image")
-  createdAt       DateTime  @default(now()) @map("created_at")
-  updatedAt       DateTime? @updatedAt @map("updated_at")
-  user_id         Users     @relation(fields: [usersId], references: [id])
-  usersId         String
-
-  @@map("franchises")
-}
-
 model Clients {
-  id          String     @id @default(uuid())
-  mac         String?    @unique
-  name        String?
-  description String?
-  lastLogin   DateTime?  @map("last_login")
-  createdAt   DateTime   @default(now()) @map("created_at")
-  updatedAt   DateTime?  @updatedAt @map("updated_at")
-  Channels    Channels[]
-}
+  id             Int       @id @default(autoincrement())
+  mac            String?   @unique
+  keyId          String?   @map("key_id")
+  name           String?
+  email          String?
+  password       String?
+  description    String?
+  dnsGroup       String?
+  lastLogin      DateTime? @map("last_login")
+  createdAt      DateTime  @default(now()) @map("created_at")
+  updatedAt      DateTime? @updatedAt @map("updated_at")
+  favorits       String?
+  recentChannels String?   @map("recent_channels")
 
-model Channels {
-  id        Int     @id @default(autoincrement())
-  favorites String?
-  recents   String?
-  clientId  Clients @relation(fields: [clientsId], references: [id])
-  clientsId String
-
-  @@map("channels")
+  @@map("clients")
 }
