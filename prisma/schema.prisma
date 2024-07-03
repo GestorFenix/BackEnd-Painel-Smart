@@ -18,6 +18,7 @@ model Users {
   name            String?
   email           String?   @unique
   password        String?
+  franchiseId     Int?      @unique @map("franchise_id")
   dns             String?   @unique
   clientLimit     Int?      @map("client_limit")
   logoImage       String?   @map("logo_image")

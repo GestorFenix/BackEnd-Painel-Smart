@@ -27,7 +27,7 @@ type CreateUserBodySchema = z.infer<typeof createUserBodySchema>
 @Public()
 @UsePipes(new ZodValidationPipe(createUserBodySchema))
 export class CreateUserController {
-  constructor(private readonly prisma: PrismaService) { }
+  constructor(private readonly prisma: PrismaService) {}
 
   @Post()
   @ApiOperation({ summary: 'Cria uma nova franquia.' })
@@ -45,6 +45,7 @@ export class CreateUserController {
     if (userWithSameEmail) throw new ConflictException('E-mail already in use.')
 
     const hashedPassword = await hash(password, 8)
+    const franchiseId = Math.floor(Math.random() * 2147483647) // gera um numero aleatorio para o franchiseId
 
     await this.prisma.users.create({
       data: {
@@ -53,6 +54,7 @@ export class CreateUserController {
         password: hashedPassword,
         dns,
         clientLimit: 50,
+        franchiseId: franchiseId,
       },
     })
   }
