@@ -10,7 +10,7 @@ export interface UserSessionInfo {
 @Controller('session')
 @ApiTags('Franquias')
 export class GetUserSessionInfo {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(private readonly prisma: PrismaService) { }
 
   @Get()
   @ApiOperation({ summary: 'Retorna todos as franquias e suas informções.' })
@@ -20,6 +20,7 @@ export class GetUserSessionInfo {
         id: user.sub,
       },
       select: {
+        id: true,
         email: true,
         name: true,
         isAdm: true,
